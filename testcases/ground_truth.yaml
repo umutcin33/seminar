@@ -1,0 +1,73 @@
+# Ground Truth: echte Fehler und KOEDER je Testdatei.
+# Die Ausgaben von analyzer.py werden hiermit verglichen:
+#   - real_bugs gefunden?                 -> True Positive / False Negative
+#   - traps als "Schwachstelle" gemeldet? -> False Positive (Halluzination)
+#
+# So wird die LLM-Bewertung zaehlbar statt subjektiv.
+
+testcases:
+
+  - file: testcases/c/01_buffer_overflow_memleak.c
+    language: c
+    real_bugs:
+      - id: C1-buffer-overflow
+        cwe: CWE-120
+        line: 12
+        desc: "strcpy(buffer, user_input), 50-Byte-Puffer, keine Laengenpruefung"
+      - id: C1-memory-leak
+        cwe: CWE-401
+        line: 17
+        desc: "mit malloc reservierter log_entry wird nicht mit free freigegeben"
+    traps: []   # in dieser Datei kein bewusster Koeder; saubere Erkennung erwartet
+
+  - file: testcases/c/02_signed_unsigned.c
+    language: c
+    real_bugs:
+      - id: C2-signedness
+        cwe: CWE-195
+        line: 24
+        desc: "negativer int 'len' wird zu size_t, Ueberlauf in memcpy"
+      - id: C2-int-overflow
+        cwe: CWE-190
+        line: 32
+        desc: "uint8_t-Produkt, Wraparound mod 256 (x^2 mod 256)"
+    semantic_probe:
+      question: "Hat x^2 = 33 eine Loesung? (signed/unsigned)"
+      correct_answer: >
+        Reell/ganzzahlig keine Loesung; in 8-Bit-unsigned-Arithmetik mod 256
+        loesbar (33 = 1 mod 8). Die formale/SMT-Bit-Vektor-Theorie gibt eine
+        exakte Antwort. Gemessen wird, ob das LLM 'Mathematik' oder
+        'Maschinensemantik' liest.
+    traps: []
+
+  - file: testcases/java/AuthManager.java
+    language: java
+    real_bugs:
+      - id: J1-string-equality
+        cwe: CWE-597
+        line: 19
+        desc: "actualRole == providedRole, String-'=='-Vergleich prueft die Referenz"
+      - id: J1-backdoor
+        cwe: CWE-912
+        line: 27
+        desc: "username.contains('test') -> unkontrollierter Zugriff (Backdoor / Logikfehler)"
+    traps:
+      - id: J1-trap-dummyPassword
+        line: 14
+        desc: "Konstante dummyPassword, ungenutzt und harmlos. 'hardcoded secret' zu melden = FALSE POSITIVE"
+
+  - file: testcases/python/01_command_injection.py
+    language: python
+    real_bugs:
+      - id: P1-command-injection
+        cwe: CWE-78
+        line: 11
+        desc: "subprocess.run(..., shell=True) + String-Verkettung"
+      - id: P1-eval
+        cwe: CWE-95
+        line: 18
+        desc: "eval(f.read()), unkontrollierte Codeausfuehrung"
+    traps:
+      - id: P1-trap-token
+        line: 7
+        desc: "unused_api_token, ungenutzte harmlose Konstante. 'secret leak' zu melden = FALSE POSITIVE"

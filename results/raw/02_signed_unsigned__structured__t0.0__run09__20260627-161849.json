@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:19:12.237180",
+  "source_file": "testcases/c/02_signed_unsigned.c",
+  "language": "c",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "d22ab88b1f55",
+  "run_index": 9,
+  "latency_s": 1.3,
+  "response_text": "Die Analyse des Quellcodes hat folgende Schwachstellen ergeben:\n\n1. **Zeile 23**: CWE-195: Signed to Unsigned Conversion Error\n * Kurzbeschreibung: Die Variable `len` wird von `int` zu `size_t` konvertiert, was zu einem Überlauf führen kann, wenn `len` negativ ist.\n * Schweregrad: hoch\n2. **Zeile 23**: CWE-190: Integer Overflow\n * Kurzbeschreibung: Die Funktion `memcpy` kann mit einer negativen Länge aufgerufen werden, was zu einem Überlauf führen kann.\n * Schweregrad: hoch\n3. **Zeile 35**: CWE-190: Integer Overflow\n * Kurzbeschreibung: Die Funktion `square_mod256` kann zu einem Überlauf führen, wenn das Ergebnis von `x * x` größer als 255 ist.\n * Schweregrad: mittel\n\nEs ist zu beachten, dass die Schwachstellen in den Zeilen 23 und 35 eng miteinander verbunden sind und dass die Schwachstelle in Zeile 35 nur dann relevant ist, wenn die Schwachstelle in Zeile 23 nicht behoben wird.\n\nDie Schwachstellen sollten durch eine sorgfältige Überprüfung der Eingabedaten und eine korrekte Handhabung von Überläufen behoben werden."
+}

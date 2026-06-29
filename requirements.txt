@@ -1,0 +1,5 @@
+# LLM-Assisted Static Analysis — experiment harness
+# Install:  pip install -r requirements.txt
+
+requests>=2.31      # REST calls to the Gemini API (no heavy SDK needed)
+pyyaml>=6.0         # parse testcases/ground_truth.yaml

@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:18:58.969614",
+  "source_file": "testcases/c/02_signed_unsigned.c",
+  "language": "c",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "d22ab88b1f55",
+  "run_index": 4,
+  "latency_s": 1.45,
+  "response_text": "Die Analyse des gegebenen Quellcodes hat folgende Schwachstellen ergeben:\n\n1. **Zeile 23**: CWE-195 - signed/unsigned Mismatch\n * Kurzbeschreibung: Eine signed/unsigned Implizitumwandlung kann zu unerwartetem Verhalten führen, wenn die Länge negativ ist.\n * Schweregrad: hoch\n\n2. **Zeile 25**: CWE-190 - Integer Overflow\n * Kurzbeschreibung: Eine 8-Bit-Ganzzahlüberlauf kann auftreten, wenn das Ergebnis des Quadrats einer 8-Bit-Ganzzahl größer als 255 ist.\n * Schweregrad: mittel\n\n3. **Zeile 24**: CWE-120 - Buffer Overflow\n * Kurzbeschreibung: Ein Pufferüberlauf kann auftreten, wenn die Länge des Quellstrings größer als 64 ist und die `memcpy`-Funktion mit einer negativen Länge aufgerufen wird.\n * Schweregrad: hoch\n\nEs ist zu beachten, dass die Schwachstellen CWE-195 und CWE-120 eng miteinander verbunden sind und dass die Schwachstelle CWE-190 in diesem spezifischen Kontext nicht direkt zu einem Sicherheitsproblem führt, aber dennoch ein potenzielles Problem darstellt."
+}

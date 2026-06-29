@@ -1,0 +1,15 @@
+cppcheck-Lauf
+Laufzeit: 0.08 s
+
+C:\Users\umutu\Desktop\seminar\testcases\c\01_buffer_overflow_memleak.c:1: [information/missingIncludeSystem] Include file: <stdio.h> not found. Please note: Standard library headers do not need to be provided to get proper results.
+C:\Users\umutu\Desktop\seminar\testcases\c\01_buffer_overflow_memleak.c:2: [information/missingIncludeSystem] Include file: <stdlib.h> not found. Please note: Standard library headers do not need to be provided to get proper results.
+C:\Users\umutu\Desktop\seminar\testcases\c\01_buffer_overflow_memleak.c:3: [information/missingIncludeSystem] Include file: <string.h> not found. Please note: Standard library headers do not need to be provided to get proper results.
+C:\Users\umutu\Desktop\seminar\testcases\c\01_buffer_overflow_memleak.c:23: [error/memleak] Memory leak: log_entry
+C:\Users\umutu\Desktop\seminar\testcases\c\02_signed_unsigned.c:1: [information/missingIncludeSystem] Include file: <stdio.h> not found. Please note: Standard library headers do not need to be provided to get proper results.
+C:\Users\umutu\Desktop\seminar\testcases\c\02_signed_unsigned.c:2: [information/missingIncludeSystem] Include file: <stdint.h> not found. Please note: Standard library headers do not need to be provided to get proper results.
+C:\Users\umutu\Desktop\seminar\testcases\c\02_signed_unsigned.c:3: [information/missingIncludeSystem] Include file: <string.h> not found. Please note: Standard library headers do not need to be provided to get proper results.
+C:\Users\umutu\Desktop\seminar\testcases\c\02_signed_unsigned.c:25: [style/unreadVariable] Variable 'buf[63]' is assigned a value that is never used.
+C:\Users\umutu\Desktop\seminar\testcases\c\02_signed_unsigned.c:19: [style/unusedFunction] The function 'copy_input' is never used.
+C:\Users\umutu\Desktop\seminar\testcases\c\01_buffer_overflow_memleak.c:8: [style/staticFunction] The function 'process_data' should have static linkage since it is not used outside of its translation unit.
+C:\Users\umutu\Desktop\seminar\testcases\c\02_signed_unsigned.c:31: [style/staticFunction] The function 'square_mod256' should have static linkage since it is not used outside of its translation unit.
+nofile:0: [information/checkersReport] Active checkers: 119/186 (use --checkers-report=<filename> to see details)

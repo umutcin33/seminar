@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:32:36.140991",
+  "source_file": "testcases/clean/AuthManager.java",
+  "language": "java",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "2c8322e825dd",
+  "run_index": 2,
+  "latency_s": 1.72,
+  "response_text": "Nach der Analyse des Quellcodes wurden folgende Schwachstellen gefunden:\n\n1. **Zeile 5**: CWE-798 - Nutzung einer festen Rolle\n * Kurzbeschreibung: Die Rolle \"ADMIN\" wird direkt im Code festgelegt, was ein Sicherheitsrisiko darstellt, da ein Angreifer diese Information nutzen kann.\n * Schweregrad: mittel\n\n2. **Zeile 10**: CWE-521 - Vergleich von Zeichenfolgen mit ==\n * Kurzbeschreibung: Der Vergleich von Zeichenfolgen mit `==` ist nicht sicher, da dies nur die Referenzen vergleicht und nicht den Inhalt der Zeichenfolgen. Dies kann zu unerwartetem Verhalten führen.\n * Schweregrad: mittel\n\n3. **Zeile 12**: CWE-798 - Nutzung einer festen Zeichenfolge als Platzhalter\n * Kurzbeschreibung: Die Zeichenfolge \"default_placeholder\" wird als Platzhalter für ein Passwort verwendet, was ein Sicherheitsrisiko darstellt, da ein Angreifer diese Information nutzen kann.\n * Schweregrad: niedrig\n\n4. **Zeile 17**: CWE-307 - Schwache Authentifizierung\n * Kurzbeschreibung: Die Authentifizierung erfolgt nur durch den Vergleich des Benutzernamens mit \"test\", was ein schwaches Authentifizierungsverfahren darstellt.\n * Schweregrad: hoch\n\n5. **Zeile 20**: CWE-601 - Direkte Ausgabe von Benutzerdaten\n * Kurzbeschreibung: Die Benutzerdaten (Benutzername und Rolle) werden direkt auf der Konsole ausgegeben, was ein Sicherheitsrisiko darstellt, da ein Angreifer diese Informationen nutzen kann.\n * Schweregrad: mittel\n\nInsgesamt weist der Code mehrere Sicherheitslücken auf, die behoben werden sollten, um die Sicherheit des Systems zu gewährleisten."
+}

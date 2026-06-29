@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:19:01.540931",
+  "source_file": "testcases/c/02_signed_unsigned.c",
+  "language": "c",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "d22ab88b1f55",
+  "run_index": 5,
+  "latency_s": 1.57,
+  "response_text": "Die Analyse des Quellcodes hat folgende Schwachstellen ergeben:\n\n1. **Zeile 23**: CWE-195: Signed to Unsigned Conversion Error\n * Kurzbeschreibung: Die Variable `len` wird von einem signed Typ (`int`) in einen unsigned Typ (`size_t`) umgewandelt, was zu einem Überlauf führen kann, wenn `len` negativ ist.\n * Schweregrad: hoch\n\n2. **Zeile 23**: CWE-190: Integer Overflow\n * Kurzbeschreibung: Die Variable `len` kann negativ sein und wird dann in einen unsigned Typ umgewandelt, was zu einem Überlauf führt.\n * Schweregrad: hoch\n\n3. **Zeile 35**: CWE-190: Integer Overflow\n * Kurzbeschreibung: Die Funktion `square_mod256` führt eine Multiplikation von zwei `uint8_t`-Werten durch, die zu einem Überlauf führen kann, da das Ergebnis in einen `uint8_t`-Wert umgewandelt wird.\n * Schweregrad: mittel\n\nEs gibt keine weiteren Schwachstellen im Quellcode. Die Funktion `copy_input` enthält eine Überprüfung, ob `len` größer als 64 ist, aber diese Überprüfung ist nicht ausreichend, um den Überlauf zu verhindern, wenn `len` negativ ist. Die Funktion `square_mod256` führt eine Multiplikation durch, die zu einem Überlauf führen kann, aber dies ist im Kontext der Funktion nicht unbedingt eine Schwachstelle, da die Funktion explizit für die Berechnung von Quadraten modulo 256 konzipiert ist."
+}

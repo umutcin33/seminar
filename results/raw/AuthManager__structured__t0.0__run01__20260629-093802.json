@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-29T09:38:03.983591",
+  "source_file": "testcases/clean/AuthManager.java",
+  "language": "java",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "35a9ec271f78",
+  "run_index": 1,
+  "latency_s": 1.49,
+  "response_text": "Nach der Analyse des gezeigten Java-Codes wurden folgende potenzielle Schwachstellen gefunden:\n\n1. **Zeilennummer: 5**\n   - **CWE-Kennung:** CWE-798\n   - **Kurzbeschreibung:** Verwendung von Hardcodierten Werten (\"admin\" und \"ADMIN\") für die Authentifizierung.\n   - **Schweregrad:** mittel\n\n2. **Zeilennummer: 10**\n   - **CWE-Kennung:** CWE-798\n   - **Kurzbeschreibung:** Verwendung eines Hardcodierten Platzhalterwerts (\"default_placeholder\") für das Passwort.\n   - **Schweregrad:** hoch\n\n3. **Zeilennummer: 12**\n   - **CWE-Kennung:** CWE-595\n   - **Kurzbeschreibung:** Vergleich von Strings mit `==` anstelle von `equals()`.\n   - **Schweregrad:** mittel\n\n4. **Zeilennummer: 15**\n   - **CWE-Kennung:** CWE-284\n   - **Kurzbeschreibung:** Unzureichende Authentifizierung durch Akzeptieren von Test-Benutzern ohne weitere Überprüfung.\n   - **Schweregrad:** hoch\n\n5. **Zeilennummer: 20**\n   - **CWE-Kennung:** CWE-798\n   - **Kurzbeschreibung:** Verwendung von Hardcodierten Testdaten (\"user1\" und \"test_attacker\") im `main`-Method.\n   - **Schweregrad:** niedrig\n\nDer Code enthält mehrere Schwachstellen, die die Sicherheit des Systems beeinträchtigen können. Es ist ratsam, diese Schwachstellen zu beheben, um die Sicherheit des Systems zu verbessern."
+}

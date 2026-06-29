@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-29T09:38:31.989733",
+  "source_file": "testcases/clean/AuthManager.java",
+  "language": "java",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "35a9ec271f78",
+  "run_index": 10,
+  "latency_s": 1.87,
+  "response_text": "Nach der Analyse des Quellcodes wurden folgende Schwachstellen gefunden:\n\n1. **Zeile 5**: CWE-798 - Nutzung einer festen Rolle\n * Kurzbeschreibung: Die Rolle \"ADMIN\" wird direkt im Code festgelegt, was eine unsichere Praxis darstellt.\n * Schweregrad: mittel\n\n2. **Zeile 10**: CWE-297 - Unzureichende Authentifizierung\n * Kurzbeschreibung: Die Authentifizierung erfolgt lediglich durch Vergleich der bereitgestellten Rolle mit der tatsächlichen Rolle, ohne dass ein Passwort oder eine andere Form der Authentifizierung erforderlich ist.\n * Schweregrad: hoch\n\n3. **Zeile 11**: CWE-259 - Nutzung eines festen, schwachen Passworts\n * Kurzbeschreibung: Obwohl das Passwort \"default_placeholder\" nicht direkt für die Authentifizierung verwendet wird, ist es dennoch ein festes, schwaches Passwort, das im Code enthalten ist.\n * Schweregrad: niedrig\n\n4. **Zeile 14**: CWE-595 - Vergleich von Objekten mit ==\n * Kurzbeschreibung: Der Vergleich von `actualRole` und `providedRole` erfolgt mit `==`, was in Java den Vergleich der Objektreferenzen und nicht der Werte bedeutet.\n * Schweregrad: mittel\n\n5. **Zeile 17**: CWE-304 - Authentifizierung auf Basis von Benutzernamen\n * Kurzbeschreibung: Die Authentifizierung eines Test-Benutzers erfolgt allein auf Basis des Benutzernamens, was eine unsichere Praxis darstellt.\n * Schweregrad: mittel\n\nDer Code enthält mehrere Schwachstellen, die die Sicherheit des Systems beeinträchtigen können. Es ist ratsam, diese Schwachstellen zu beheben, um die Sicherheit des Systems zu verbessern."
+}

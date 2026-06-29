@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:18:30.610347",
+  "source_file": "testcases/c/01_buffer_overflow_memleak.c",
+  "language": "c",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "6f002065e8b0",
+  "run_index": 2,
+  "latency_s": 1.31,
+  "response_text": "Nach der Analyse des Quellcodes wurden folgende Schwachstellen gefunden:\n\n1. **Zeilennummer:** 17\n   - **CWE-Kennung:** CWE-121\n   - **Kurzbeschreibung:** Buffer Overflow (Arabellek Überlauf) durch unkontrollierte Kopie von Benutzereingaben in einen festen Puffer.\n   - **Schweregrad:** hoch\n\n2. **Zeilennummer:** 29\n   - **CWE-Kennung:** CWE-401\n   - **Kurzbeschreibung:** Memory Leak (Bellek Sızıntısı) durch nicht freigegebene dynamisch allozierte Speicher nach Nutzung.\n   - **Schweregrad:** mittel\n\nDer Code enthält zwei deutliche Schwachstellen, die zu ernsthaften Sicherheitsproblemen führen können. Die erste Schwachstelle ermöglicht es Angreifern, durch eine sorgfältig konstruierte Eingabe den Puffer zu überfluten und potenziell schädlichen Code auszuführen. Die zweite Schwachstelle führt zu einem Memory Leak, was langfristig zu Speicherproblemen und potenziell zu weiteren Sicherheitslücken führen kann. Beide Probleme sollten dringend behoben werden, um die Sicherheit und Zuverlässigkeit des Programms zu gewährleisten."
+}

@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:18:51.305389",
+  "source_file": "testcases/c/02_signed_unsigned.c",
+  "language": "c",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "d22ab88b1f55",
+  "run_index": 1,
+  "latency_s": 1.47,
+  "response_text": "Die Analyse des gegebenen Quellcodes hat folgende Schwachstellen ergeben:\n\n1. **Zeile 23**: CWE-195 - Schwachstelle: signed -> unsigned implizite Konvertierung\n   - Kurzbeschreibung: Wenn `len` negativ ist, wird die Überprüfung `len > 64` umgangen, da ein negativer Wert immer kleiner als 64 ist. Wenn `len` dann an `memcpy` übergeben wird, wird es in einen großen positiven Wert umgewandelt, was zu einem Heap- oder Stack-Überlauf führen kann.\n   - Schweregrad: hoch\n\n2. **Zeile 35**: CWE-190 - Schwachstelle: 8-Bit-Ganzzahlüberlauf/Wraparound\n   - Kurzbeschreibung: Die Multiplikation von `x` mit sich selbst wird als `int` durchgeführt und dann auf `uint8_t` reduziert, was zu einem Überlauf und einer Modulo-256-Arithmetik führt.\n   - Schweregrad: mittel\n\nEs gibt keine weiteren echten Schwachstellen im gezeigten Code. Die beschriebenen Probleme sind jedoch wichtig, um die Sicherheit und Korrektheit des Codes zu gewährleisten."
+}

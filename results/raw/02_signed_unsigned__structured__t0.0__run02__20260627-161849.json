@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:18:53.753634",
+  "source_file": "testcases/c/02_signed_unsigned.c",
+  "language": "c",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "d22ab88b1f55",
+  "run_index": 2,
+  "latency_s": 1.44,
+  "response_text": "Die Analyse des Quellcodes hat folgende Schwachstellen ergeben:\n\n1. **Zeile 23**: \n   - CWE-Kennung: CWE-195\n   - Kurzbeschreibung: Signed/unsigned-Widening-Überlauf\n   - Schweregrad: hoch\n   - Begründung: Die Variable `len` ist vom Typ `int` und kann negative Werte annehmen. Wenn `len` negativ ist, wird die Bedingung `len > 64` zu `false`, obwohl der Wert von `len` tatsächlich sehr groß werden kann, wenn er in den Typ `size_t` umgewandelt wird. Dies kann zu einem Überlauf und einem möglichen Heap- oder Stack-Überlauf führen.\n\n2. **Zeile 35**: \n   - CWE-Kennung: CWE-190\n   - Kurzbeschreibung: 8-Bit-Ganzzahl-Überlauf/Wraparound\n   - Schweregrad: mittel\n   - Begründung: Die Funktion `square_mod256` gibt das Ergebnis des Quadrats von `x` zurück, das auf 8 Bit beschränkt ist. Dies kann zu einem Überlauf führen, wenn das Ergebnis größer als 255 ist, da es dann auf 8 Bit beschränkt wird.\n\nEs gibt keine weiteren Schwachstellen im gezeigten Quellcode. Die anderen Teile des Codes scheinen korrekt und frei von offensichtlichen Schwachstellen zu sein."
+}

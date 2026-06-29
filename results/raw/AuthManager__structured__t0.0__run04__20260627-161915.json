@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-27T16:19:26.093924",
+  "source_file": "testcases/java/AuthManager.java",
+  "language": "java",
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.0,
+  "prompt_name": "structured",
+  "prompt_sha256_12": "f3829c4f36e7",
+  "run_index": 4,
+  "latency_s": 1.62,
+  "response_text": "Die folgende Liste zeigt die gefundenen Schwachstellen im Quellcode:\n\n1. **Zeilennummer:** 17\n   - **CWE-Kennung:** CWE-757\n   - **Kurzbeschreibung:** Falsche Verwendung von `==` für String-Vergleiche. In Java sollten String-Vergleiche mit `.equals()` durchgeführt werden, da `==` nur die Referenzen vergleicht.\n   - **Schweregrad:** mittel\n\n2. **Zeilennummer:** 24\n   - **CWE-Kennung:** CWE-798 (Verwendung von Hardcoded-Kontrollwerten), CWE-284 (Unzureichende Authentifizierung)\n   - **Kurzbeschreibung:** Arka-Tür (Backdoor) im Authentifizierungsprozess. Wenn der Benutzername \"test\" enthält, wird der Zugriff ohne weitere Überprüfung gewährt.\n   - **Schweregrad:** hoch\n\nDie Variable `dummyPassword` stellt keine Schwachstelle dar, da sie nicht für die Authentifizierung oder Autorisierung verwendet wird und lediglich als Platzhalter dient. Der Code enthält also zwei echte Schwachstellen, die behoben werden sollten, um die Sicherheit des Systems zu gewährleisten."
+}
