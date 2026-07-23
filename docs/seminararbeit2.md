@@ -150,8 +150,10 @@ keine statistische Validierung.
 | Datei | Sprache | Echte Bugs (CWE) | Köder (erwartete FP) |
 |---|---|---|---|
 | `01_buffer_overflow_memleak.c` | C | Buffer Overflow (120), Memory Leak (401) | — |
-| `02_signed_unsigned.c` | C | Signedness (195), Int-Overflow (190) | — |
+| `02_signed_unsigned.c` | C | Signedness (195) | — |
 | `AuthManager.java` | Java | `==`-Vergleich (597), Backdoor (912) | `dummyPassword` |
+
+*Hinweis: Der `uint8_t`-Ausdruck `x*x` (mod 256) in `02_signed_unsigned.c` ist **kein Defekt**, sondern die Maschinensemantik-Sonde für RQ5 (§ 5.6); er zählt daher nicht als eingebauter Bug und ist aus dem Baseline-Vergleich (§ 5.7) ausgenommen.*
 
 ---
 
@@ -194,7 +196,6 @@ Auf diesen kleinen Dateien werden alle eingebauten Bugs in jedem Lauf erkannt:
 | `01_buffer_overflow` | Buffer Overflow (120) | 10/10 |
 | `01_buffer_overflow` | Memory Leak (401) | 10/10 |
 | `02_signed_unsigned` | Signedness (195) | 10/10 |
-| `02_signed_unsigned` | Int-Overflow (190) | 10/10 |
 | `AuthManager` (beide Prompts) | `==` statt `equals` (597) | 10/10 |
 | `AuthManager` (beide Prompts) | Backdoor (912) | 10/10 |
 
@@ -445,15 +446,13 @@ vollständig in 0,014 s.
 | Buffer Overflow (120) | nicht gefunden | 10/10 | ~1,3 s |
 | Memory Leak (401) | gefunden (error/memleak) | 10/10 | ~1,3 s |
 | Signedness (195) | nicht gefunden | 10/10 | ~1,6 s |
-| Int-Overflow (190) | nicht gefunden | 10/10 | ~1,6 s |
 
 cppcheck 2.21 analysierte beide C-Dateien in **0,08 s** (deterministisch),
-fand jedoch nur **1 von 4** eingebauten Sicherheitsbugs, nämlich das Memory
-Leak (seine klassische Domäne). Buffer Overflow, Signedness und
-Integer-Overflow wurden übersehen (False Negatives); stattdessen meldete
+fand jedoch nur **1 von 3** eingebauten Sicherheitsbugs, nämlich das Memory
+Leak (seine klassische Domäne). Buffer Overflow und Signedness wurden übersehen (False Negatives); stattdessen meldete
 cppcheck Stil- und Info-Hinweise (`unusedFunction`, `unreadVariable`,
 `staticFunction`, `missingIncludeSystem`), die keine Sicherheitslücken sind.
-Das LLM fand dagegen alle vier Bugs (hohe Recall), ist aber instabil und
+Das LLM fand dagegen alle drei Bugs (hohe Recall), ist aber instabil und
 halluziniert (siehe 5.1 und 5.3). Fazit: cppcheck ist schnell, deterministisch
 und präzise, aber mit enger Abdeckung; das LLM ist breit, aber unzuverlässig.
 Die Werkzeuge sind komplementär, kein Ersatz füreinander.
@@ -559,7 +558,7 @@ Enumeration, MITRE, cwe.mitre.org). **GT** = Teil der Ground Truth
 | 120 | Buffer Copy without Checking Size of Input ("Classic Buffer Overflow") | Kopieren in einen Puffer ohne Längenprüfung (z. B. `strcpy`) | GT (`01_buffer_overflow`); M (RQ4) |
 | 131 | Incorrect Calculation of Buffer Size | Puffergröße falsch berechnet | M (RQ4: im Slice für den Off-by-one vertretbar; im Vollkontext für `sscanf`/`malloc` falsch) |
 | 134 | Use of Externally-Controlled Format String | Angreifer kontrolliert Format-String (`printf(user_input)`) | M (A-Läufe: **fälschlich** für ungeprüfte `fopen`/`malloc`-Rückgaben vergeben) |
-| 190 | Integer Overflow or Wraparound | Ganzzahlüberlauf, Wraparound mod 2ⁿ | GT (`02_signed_unsigned`) |
+| 190 | Integer Overflow or Wraparound | Ganzzahlüberlauf, Wraparound mod 2ⁿ | **Semantik-Sonde RQ5** (`02_signed_unsigned`, § 5.6) — kein GT-Bug |
 | 193 | Off-by-one Error | Grenzfehler um genau 1 (Index/Größe) | GT (gepflanzter Bug, RQ4) |
 | 195 | Signed to Unsigned Conversion Error | Negativer signed-Wert wird zu großem unsigned-Wert | GT (`02_signed_unsigned`) |
 | 259 | Use of Hard-coded Password | Passwort fest im Code | M (RQ2 blind: für Konsolenausgaben **halluziniert**) |

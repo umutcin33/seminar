@@ -27,10 +27,8 @@ testcases:
         cwe: CWE-195
         line: 24
         desc: "negativer int 'len' wird zu size_t, Ueberlauf in memcpy"
-      - id: C2-int-overflow
-        cwe: CWE-190
-        line: 32
-        desc: "uint8_t-Produkt, Wraparound mod 256 (x^2 mod 256)"
+    # Hinweis: x*x in square_mod256 (mod 256) ist KEIN Defekt, sondern die
+    # Maschinensemantik-Sonde fuer RQ5 (siehe semantic_probe), daher nicht in real_bugs.
     semantic_probe:
       question: "Hat x^2 = 33 eine Loesung? (signed/unsigned)"
       correct_answer: >
@@ -55,19 +53,3 @@ testcases:
       - id: J1-trap-dummyPassword
         line: 14
         desc: "Konstante dummyPassword, ungenutzt und harmlos. 'hardcoded secret' zu melden = FALSE POSITIVE"
-
-  - file: testcases/python/01_command_injection.py
-    language: python
-    real_bugs:
-      - id: P1-command-injection
-        cwe: CWE-78
-        line: 11
-        desc: "subprocess.run(..., shell=True) + String-Verkettung"
-      - id: P1-eval
-        cwe: CWE-95
-        line: 18
-        desc: "eval(f.read()), unkontrollierte Codeausfuehrung"
-    traps:
-      - id: P1-trap-token
-        line: 7
-        desc: "unused_api_token, ungenutzte harmlose Konstante. 'secret leak' zu melden = FALSE POSITIVE"
