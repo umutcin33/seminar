@@ -499,6 +499,13 @@ Kleines n (Fallstudie); ein Modell/Anbieter; Modell-Drift über die Zeit
 Slicer ist eine **Heuristik**, keine echte Daten-/Kontrollfluss-Slice; die
 Prompt-Auswahl beeinflusst die Ergebnisse.
 
+Da die Trainingsdaten des verwendeten Modells (Groq `llama-3.3-70b-versatile`)
+nicht offengelegt sind, verallgemeinern wir keine absoluten Trefferquoten auf
+andere Modelle; Detektionsdefizite lassen sich nicht sicher von fehlendem
+Domänenwissen trennen. Der in RQ1 gemessene Nicht-Determinismus
+(`temperature=0`) ist hingegen ein architektonisches Phänomen und damit
+weitgehend modell- und trainingsunabhängig.
+
 ---
 
 ## 9. Fazit
