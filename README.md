@@ -1,6 +1,6 @@
 # LLM-gestützte statische Analyse — Proof of Concept
 
-Seminar (Prof. Fuchß / Prof. Sulzmann) · Grundlage: **Wang et al. (2025),
+Seminar · Grundlage: **Wang et al. (2025),
 *A Contemporary Survey of Large Language Model Assisted Program Analysis*,
 arXiv:2502.18474** → `papers/2502.18474v1.pdf`.
 
