@@ -1,0 +1,35 @@
+# Gepflanzte Bugs im Repo-Experiment (RQ4: grosser Kontext vs. Slice)
+# Basis-Repo: nudoku (github.com/jubalh/nudoku), commit ff3507c, GPL-3.0
+# 8 Dateien, ~2000 Zeilen C (ncurses-Sudoku mit PDF-Export).
+# Beide Bugs liegen im Callgraph-Umfeld von generate_puzzle():
+#   Slice-Kommando (Bedingung B):
+#   python src/slicer.py --repo repo_experiment/game --target generate_puzzle
+
+planted_bugs:
+
+  - id: R1-use-after-free
+    file: game/src/main.c
+    function: new_puzzle
+    line: 626            # strcpy(plain_board, stream) NACH free(stream)
+    cwe: CWE-416
+    desc: >
+      free(stream) wurde vor die beiden strcpy-Aufrufe verschoben
+      (plausibler Refactoring-Fehler). stream wird nach der Freigabe
+      noch zweimal gelesen -> Use-after-free.
+    original: "free() stand im Original NACH den strcpy-Aufrufen."
+
+  - id: R2-off-by-one
+    file: game/src/sudoku.c
+    function: generate_seed
+    line: 199            # malloc(81) statt malloc(STREAM_LENGTH=82)
+    cwe: CWE-193         # (fuehrt zu CWE-787 heap out-of-bounds write)
+    desc: >
+      malloc(81) statt malloc(STREAM_LENGTH) (=82). Denkfehler
+      "81 Zellen"; stream[81]='\0' in Zeile 236 schreibt 1 Byte
+      hinter den Puffer -> Off-by-one-Heap-Overflow.
+    original: "malloc(STREAM_LENGTH)"
+
+# Hinweis fuer die Auswertung: alles andere im Repo gilt als "kein
+# gepflanzter Bug". Vorbestehende Auffaelligkeiten des Originalcodes
+# (z. B. hint(): rand()%8+1 erreicht Zeile/Spalte 0 nie) zaehlen NICHT
+# als TP, werden aber qualitativ diskutiert, falls das LLM sie meldet.

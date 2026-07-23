@@ -36,8 +36,15 @@ rein?", sondern:
   benennen.
 
 ## Status
-- [ ] Repo ausgewählt und nach `game/` kopiert
-- [ ] Bugs gepflanzt + `bugs/planted_bugs.yaml`
-- [ ] Lauf A (Vollkontext)
-- [ ] Lauf B (Slice)
-- [ ] Auswertung in `docs/seminararbeit.md`
+- [x] Repo ausgewählt und nach `game/` kopiert — **nudoku** (jubalh/nudoku,
+      commit ff3507c, GPL-3.0), 8 Dateien, ~2000 Zeilen C
+- [x] Bugs gepflanzt + `bugs/planted_bugs.yaml` (UAF in `new_puzzle`,
+      Off-by-one in `generate_seed`)
+- [x] Lauf A (Vollkontext) — Free-Tier-TPM-Limit erzwang Variante
+      `A_full_s` (5 Dateien, ~11 k Token); XL/full → HTTP 413.
+      5 Läufe in `results/raw/input_A_full_s__*`
+- [x] Lauf B (Slice um `generate_puzzle`, 13 % des Repos) — 5 Läufe in
+      `results/raw/input_B_slice__*`
+- [x] Auswertung: `python src/score_rq4.py` + manueller Abgleich
+- [x] Auswertung in `docs/seminararbeit2.md` §5.5 — Kernbefund:
+      Off-by-one im Vollkontext 0/5, im Slice 5/5 (Ort); UAF 0/10 überall
